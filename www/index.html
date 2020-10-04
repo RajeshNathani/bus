@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body{
+            background-image: url('4080938.jpg');
+            background-size: cover;
+            height: 100vh;
+            background-repeat: no-repeat;
+        }
+        h1{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="uk-container"> <br>
+        <center><h1>ABC School</h1></center>
+        <br>
+        <input type="text" name="" id="name" class="uk-input" placeholder="First Name"><br><br>
+        <input type="text" name="" id="lname" class="uk-input" placeholder="Last Name"><br><br>
+        <input type="text" name="" id="route" class="uk-input" placeholder="Route"><br><br>
+        <button class="uk-button uk-button-primary" onclick="login()">Login</button>
+    </div>
+</body>
+</html>
+<script>
+    function login(){
+        var f = document.getElementById("name").value;
+        var l = document.getElementById("lname").value;
+        var r = document.getElementById("route").value;
+    fetch("https://cors-anywhere.herokuapp.com/https://ivybus.herokuapp.com/display/stu")
+    .then(res => res.json())
+    .then((data)=>{
+        console.log(f,l,r)
+        for(i=0; i<data.length; i++){
+            if(f == data[i].first && l == data[i].last && r == data[i].route){
+                console.log(f,l,r);
+                localStorage.setItem('f' , f)
+                localStorage.setItem('l' , l)
+                localStorage.setItem('r' , r)
+                window.location.replace("home.html");
+            }
+            else{
+                console.log(data)
+            }
+        }
+    });
+    }
+    if(localStorage.getItem('f').length>0){
+        window.location.replace("home.html")
+    }
+</script>

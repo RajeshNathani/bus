@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.8/dist/js/uikit-icons.min.js"></script>
+    <style>
+         body{
+            background-image: url('4080938.jpg');
+            background-size: cover;
+            height: 100vh;
+            background-repeat: no-repeat;
+        }
+        h2 , h1{
+            color: white;
+        }
+    </style>
+</head>
+<body onload="o()">
+    <div class="uk-container"><br>
+        <center><h1>ABC School</h1>
+        <h2><p id="name"></p>
+        <div id="route">Route: </div>
+        <div id="id">Bus Id: </div> </h2>
+        <a class="uk-button uk-button-danger" href="https://maps.google.com">Track</a>
+    </center>
+    </div>
+</body>
+</html>
+<script>
+    function o(){
+        
+    document.getElementById("name").textContent += localStorage.getItem('f')  +" "+ localStorage.getItem('l')
+    document.getElementById("route").textContent += localStorage.getItem('r')
+    fetch("https://cors-anywhere.herokuapp.com/https://ivybus.herokuapp.com/display/bus")
+    .then(res => res.json())
+    .then((data)=>{
+        for(i=0;i<data.length;i++){
+            if(data[i].route == localStorage.getItem("r")){
+                document.getElementById("id").textContent += data[i].id;
+                break;
+            }
+        }
+    })}
+</script>
